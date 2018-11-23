@@ -7,7 +7,7 @@ let canvas;
 
 function setup() {
   // smallest of windowWidth and windowHeight
-  let smallestDimension = min(windowWidth - 100, windowHeight - 100);
+  let smallestDimension = min(windowWidth - 200, windowHeight - 200);
   canvas = createCanvas(smallestDimension+1, smallestDimension+1);
   canvas.parent("canvasContainer");
   // setup gene manager
@@ -20,9 +20,11 @@ function setup() {
 function draw() {
   background(255);
   population.step();
-  text(geneManager.phenotype(population.best.genes), 50, 100);
+  geneManager.phenotype(population.best.genes);
+  text("Target: " + target, 50, 100);
   if(population.best.fitness == target.length){
     noLoop();
+    text("Finished!", 50, 200);
     console.log("Finished!");
   }
 }

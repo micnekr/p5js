@@ -68,7 +68,7 @@ function loadedJSON(data) {
   weatherIcon.style.visibility = "visible";
   weatherIcon.src = 'images/' + weather.weather[0].icon + '.png';
   if(forecast){
-    select('#time').html(weather.dt_txt);
+    select('#time').html("Time of forecast: " + weather.dt_txt);
   }else{
     select('#time').html("");
   }

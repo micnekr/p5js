@@ -20,7 +20,7 @@ let wallsAsLine = true;
 let randomGeneration = false;
 function setup() {
   // smallest of windowWidth and windowHeight
-  let smallestDimension = min(windowWidth - 100, windowHeight - 100);
+  let smallestDimension = min(windowWidth - 200, windowHeight - 200);
   canvas = createCanvas(smallestDimension+1, smallestDimension+1);
   canvas.parent("canvasContainer");
   // setup of height of cells

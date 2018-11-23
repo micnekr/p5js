@@ -1,13 +1,16 @@
 function salesPerson(width, height) {
   // points is an array
   this.points = [];
-  let points = [];
   // make array of lexicographical numbers
   this.order = [];
+  // number of completed paths
+  this.pathsChecked;
   // setup
   this.Setup = function(numberOfPoints) {
     // make array of lexicographical numbers
     this.order = [];
+    // set checked paths variable to 0
+    this.pathsChecked = 0;
     // add random points
     for (k = 0; k < numberOfPoints; k++) {
       this.points[k] = createVector(random(width), random(height));
@@ -17,6 +20,8 @@ function salesPerson(width, height) {
     // set record distance and record path to initial values
     this.recordDist = this.distance(this.points);
     this.recordPath = this.points.slice();
+    // calculate all possible paths
+    this.totalPathsNumber();
     // start the programm
     this.ready = false;
   }
@@ -50,6 +55,8 @@ function salesPerson(width, height) {
     this.algorythm();
     // refresh picture
     this.draw();
+    // add one to paths counter
+    this.pathsChecked++;
   }
   this.bruteForceResult = function() {
     while(!this.ready){
@@ -118,5 +125,16 @@ function salesPerson(width, height) {
       total += dist(arr[i].x, arr[i].y, arr[i + 1].x, arr[i + 1].y);
     }
     return total;
+  }
+  this.totalPathsNumber = function () {
+    this.pathsNum = this.factorial(this.points.length)
+    return this.pathsNum;
+  }
+  this.factorial = function (inputNumber) {
+    let answer = 1;
+    for (var multiple = 2; multiple <= inputNumber; multiple++) {
+      answer *= multiple;
+    }
+    return answer;
   }
 }

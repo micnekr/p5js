@@ -75,7 +75,9 @@ function GeneManager() {
 
   // phenotype
   this.phenotype = function (inputGenes) {
-    return inputGenes.join("");
+    this.text = "Best: " + inputGenes.join("");
+    text(this.text, 50, 150);
+    return this.text;
   }
 
   // fitness function
