@@ -7,9 +7,13 @@ let urlMetric = "&units=metric";
 let apiKey = "&APPID=3a2579f41685a68c39457b5e3d53743d";
 let urlParameters;
 let url;
+// string to show time
 let timeString;
+// if show forecast checkbox
 let forecastCheckbox;
+// if forecast
 let forecast = false;
+// if is currently loading
 let loading = false;
 
 function setup() {
@@ -26,5 +30,6 @@ function setup() {
   forecastCheckbox = document.getElementById("forecast");
   // set city search event
   cityInput.changed(newCity);
+  // start request
   newCity();
 }

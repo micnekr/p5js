@@ -15,16 +15,19 @@ let hotColour = [255,204,102];
 let outputColour = [];
 
 
-
+// change canvas size to fit the window
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
 function newCity() {
+  // if already waiting for responce, do escape
   if(loading){
     return;
   }
+  // start waiting for responce
   loading = true;
+  // set loading pictures
   weatherOutput.html("Loading");
   select('#time').html("");
   city = cityInput.value();
