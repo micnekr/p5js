@@ -44,7 +44,7 @@ function DNA(geneCreator, dnaLength, fillWithGenes = true) {
     // calculate genes fitness
     this.fitness = geneCreator.calcFitness(this.genes);
     // power the result so more fitness rate increases the chance of being selected even more
-    this.fitness = pow(this.fitness, power);
+    // this.fitness = pow(this.fitness, power);
     return this.fitness;
   }
 }
@@ -64,6 +64,7 @@ function GeneManager() {
     }
     this.symbols.push(String.fromCharCode(46));
     this.symbols.push(String.fromCharCode(44));
+    this.symbols.push(String.fromCharCode(32));
   }
 
   // generating random symbols

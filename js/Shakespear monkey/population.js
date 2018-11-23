@@ -3,10 +3,10 @@ function Population(populationNumber, mutatonRate, geneCreator, genesAmount) {
   this.organisms = [];
   // next generation array
   this.nextGen = [];
-  // mating pool for random selecting
-  this.matingPool = [];
   // best organism
   this.best;
+  // random picking agorythm
+  this.randomAlg = new MatingPool();
   // fill organism array with new random DNA
   for (var i = 0; i < populationNumber; i++) {
     this.organisms[i] = new DNA(geneCreator, genesAmount);
@@ -27,26 +27,6 @@ function Population(populationNumber, mutatonRate, geneCreator, genesAmount) {
     return this.best;
   }
 
-  // fill mating pool
-  this.matingPoolFill = function () {
-      // clear the matingPool
-      this.matingPool = [];
-      // itterating through every organism
-      for (var i = 0; i < this.organisms.length; i++) {
-        // pushing current organism into mating pool many times
-        let numberOfElement = this.organisms[i].fitness;
-        for (var j = 0; j < numberOfElement; j++) {
-          this.matingPool.push(this.organisms[i]);
-        }
-      }
-      return this.matingPool;
-    }
-
-  // picking one random DNA according to fitness
-  this.matingPoolPick = function () {
-    let randomDna = this.matingPool[floor(random(this.matingPool.length))];
-    return randomDna;
-  }
 
   // make new generation
   this.crossover = function (mRate = mutatonRate) {
@@ -55,8 +35,8 @@ function Population(populationNumber, mutatonRate, geneCreator, genesAmount) {
     // repeat until the nextgen is full
     for (var i = 0; i < populationNumber; i++) {
       // pick two random parents
-      let p1 = this.matingPoolPick();
-      let p2 = this.matingPoolPick();
+      let p1 = this.randomAlg.pick();
+      let p2 = this.randomAlg.pick();
       // make a child
       this.nextGen[i] = p1.crossover(p2);
       this.nextGen[i].mutate(mRate);
@@ -68,13 +48,44 @@ function Population(populationNumber, mutatonRate, geneCreator, genesAmount) {
   this.step = function () {
     // calculate all fitnesses
     this.calcFitness();
-    // create mating pool
-    this.matingPoolFill();
+    // setup random picking algorythm
+    this.randomAlg.setup(this.organisms);
     // crossover
     this.crossover();
     // update generations
     this.organisms = this.nextGen.slice();
     // return current generation
     return this.organisms;
+  }
+}
+
+
+
+
+
+
+function MatingPool() {
+  // mating pool for random selecting
+  this.matingPool = [];
+
+  // fill mating pool
+  this.setup = function (organisms) {
+      // clear the matingPool
+      this.matingPool = [];
+      // itterating through every organism
+      for (var i = 0; i < organisms.length; i++) {
+        // pushing current organism into mating pool many times
+        let numberOfElement = organisms[i].fitness;
+        for (var j = 0; j < numberOfElement; j++) {
+          this.matingPool.push(organisms[i]);
+        }
+      }
+      return this.matingPool;
+    }
+
+    // picking one random DNA according to fitness
+  this.pick = function () {
+    let randomDna = this.matingPool[floor(random(this.matingPool.length))];
+    return randomDna;
   }
 }
