@@ -26,8 +26,6 @@ function salesPerson(width, height) {
     this.ready = false;
   }
   this.draw = function() {
-    // clear the background
-    background(255);
     // set fill
     fill(0);
     // draw all points
@@ -37,12 +35,14 @@ function salesPerson(width, height) {
     // disable fill and set stroke color
     noFill();
     stroke(0);
-    // connect points
-    beginShape();
-    for (i = 0; i < points.length; i++) {
-      vertex(points[i].x, points[i].y);
+    if(!this.ready){
+      // connect points
+      beginShape();
+      for (i = 0; i < points.length; i++) {
+        vertex(points[i].x, points[i].y);
+      }
+      endShape();
     }
-    endShape();
     // draw the best attempt
     stroke(255, 0, 0);
     beginShape();

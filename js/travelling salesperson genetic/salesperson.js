@@ -1,4 +1,4 @@
-function salesPerson(width, height) {
+function salesPerson(drawOffset = 0) {
   // points is an array
   this.points = [];
   // make array of lexicographical numbers
@@ -6,14 +6,14 @@ function salesPerson(width, height) {
   // number of completed paths
   this.pathsChecked;
   // setup
-  this.Setup = function(numberOfPoints) {
+  this.Setup = function(citiesArr) {
     // make array of lexicographical numbers
     this.order = [];
     // set checked paths variable to 0
     this.pathsChecked = 0;
-    // add random points
-    for (k = 0; k < numberOfPoints; k++) {
-      this.points[k] = createVector(random(width), random(height));
+    this.points = citiesArr.slice();
+    // make a lexicographic array
+    for (k = 0; k < citiesArr.length; k++) {
       // add number to lexicographical array
       this.order[k] = k;
     }
@@ -26,28 +26,28 @@ function salesPerson(width, height) {
     this.ready = false;
   }
   this.draw = function() {
-    // clear the background
-    background(255);
     // set fill
     fill(0);
     // draw all points
     for (i = 0; i < this.points.length; i++) {
-      ellipse(points[i].x, points[i].y, 4, 4);
+      ellipse(points[i].x, points[i].y + drawOffset, 4, 4);
     }
     // disable fill and set stroke color
     noFill();
     stroke(0);
-    // connect points
-    beginShape();
-    for (i = 0; i < points.length; i++) {
-      vertex(points[i].x, points[i].y);
+    if (!this.ready) {
+      // connect points
+      beginShape();
+      for (i = 0; i < points.length; i++) {
+        vertex(points[i].x, points[i].y + drawOffset);
+      }
+      endShape();
     }
-    endShape();
     // draw the best attempt
     stroke(255, 0, 0);
     beginShape();
     for (i = 0; i < this.recordPath.length; i++) {
-      vertex(this.recordPath[i].x, this.recordPath[i].y);
+      vertex(this.recordPath[i].x, this.recordPath[i].y + drawOffset);
     }
     endShape();
   }
@@ -59,7 +59,7 @@ function salesPerson(width, height) {
     this.pathsChecked++;
   }
   this.bruteForceResult = function() {
-    while(!this.ready){
+    while (!this.ready) {
       this.algorythm();
     }
     return this.recordPath;
@@ -67,13 +67,13 @@ function salesPerson(width, height) {
   this.algorythm = function() {
     // next trial
     let order = this.lexicographic();
-    if(order == null){
+    if (order == null) {
       this.ready = true;
       return;
     }
     order = order.slice();
     points = [];
-    for(j = 0; j < order.length; j++){
+    for (j = 0; j < order.length; j++) {
       points[j] = this.points[order[j]];
     }
     // calculate total distance
@@ -126,11 +126,11 @@ function salesPerson(width, height) {
     }
     return total;
   }
-  this.totalPathsNumber = function () {
+  this.totalPathsNumber = function() {
     this.pathsNum = this.factorial(this.points.length)
     return this.pathsNum;
   }
-  this.factorial = function (inputNumber) {
+  this.factorial = function(inputNumber) {
     let answer = 1;
     for (var multiple = 2; multiple <= inputNumber; multiple++) {
       answer *= multiple;

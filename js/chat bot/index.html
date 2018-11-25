@@ -5,18 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>blank</title>
+	<title>Chat bot</title>
 	<script src="libraries/p5.js"></script>
 	<script src="libraries/p5.dom.js"></script>
 	<script src="libraries/p5.sound.js"></script>
+	<script src="libraries/p5.speech.js"></script>
+	<script src="libraries/rivescript.js"></script>
 	<script src="sketch.js"></script>
-	<script src="text genes.js"></script>
-	<!-- GA pack folder -->
-	<div>
-		<script src="GA pack/DNA.js"></script>
-		<script src="GA pack/population.js"></script>
-		<script src="GA pack/random picker.js"></script>
-	</div>
+
 
 	<style>
 	html {  }
@@ -31,17 +27,21 @@
 			margin: auto;
 		}
 	</style>
-	</style>
 </head>
 <body>
 	<center>
 	<!-- header -->
 	<div>
-		<h1>Shakespear monkey with genetic algorythm<h1>
+		<h1>Chat bot<h1>
 	</div>
-	<!-- output from programm -->
-	<div id = "output">
-		<p id = "outputBlock"></p>
+	<!-- user input -->
+	<div>
+		Write: <input id = "userInputText"></input>
+		<button id = "submit">submit</button>
+	</div>
+	<!-- bot output -->
+	<div>
+		<p id = "output"></p>
 	</div>
 	</center>
 	<!-- link to project page -->

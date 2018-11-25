@@ -1,0 +1,157 @@
+// chatbot's brain
+
+// variables
+! var favNumber = 3
+! var r = -1
+! var age = 15
+! var pentagonPassword = 1234
+
+// TOPICS
+
+// if the bot feels hurt
+> topic sorry
+
++ [*]sorry[*]
+- Fine.{topic=random}
+
++ [*]not sorry[*]
+@ *
+
++ *
+- Apologize!{weight=3}
+- I will not speak to you until you say sorry to me!{weight=3}
+- leave me alone!
+- Say sorry!{weight=4}
+
+< topic
+
+// easter egg for launching nuclear missles
+> topic _launch_nuclear_missles
+// ask user to launch nuclear rockets
++ [*]launch[*]
+- Alert:_launch_nuclear_missles? <br />
+^ -Yes. <br />
+^ -No.
+
+// if user says yes
++ yes
+- Password:----
+
+// ask for passsword
++ #
+% password
+* <star> == 0000 => Launching rockets...{topic=hacked_pentagon}
+- Wrong password.
+
+// if user said no, leave
++ no
+- Log:operation_cancelled{topic=hacked_pentagon}
+
+// catch()
++ *
+- Err:expression_not_found <br />  {@ launch}
+- Err:No_permission <br />  {@ launch}
+- Err:unknown_error.Err.code:0000 <br />  {@ launch}
+
+< topic
+
+// hacking console
+>topic console
+
+//  commands
+
++ exit
+- Terminating process...{topic=random}
+
+// help
++ help
+- Pentagon.hack(password) - hack Pentagon <br />
+^ exit - exit console.
+
++ pentagonhack(#)
+* <star> == <bot pentagonPassword> => Pentagon hacked.{topic=hacked_pentagon}
+- Wrong password
+
+// catcher
++ *
+- Err:expression_not_found:<star>. you can check list of commands by typing help
+
+< topic
+
+> topic hacked_pentagon
+
+//  commands
+
++ launch
+- {topic=_launch_nuclear_missles}{@ launch}
+
++ exit
+- Terminating process...{topic=random}
+
+// help
++ help
+- launch - launch nuclear missles <br />
+^ exit - exit console.
+
+// catcher
++ *
+- Err:expression_not_found:<star>. you can check list of commands by typing help
+
+< topic
+
+
+
+// NORMAL
+// random number
++ [*]favorite number[*]
+- Oh, my favorite number is <bot favNumber>
+
++ [*]pick[*][random ]number[*]
+- Ok, I have picked a random number between 0 and 100.
+
++ [*]#[*]
+* <bot r> == -1 => Oh, did I need to pick a random number? Ok, I have picked one between 0 and 100.
+* <star> > <bot r> => No, my number is smaller
+* <star> < <bot r> => No, my number is bigger
+- <bot r=-1>Yes! it is my number.
+
+// meet + general
+
++ [*]hi|hello[*]
+- Hi{weight=5}
+- hello{weight=7}
+- console.log(bot.randomGreeting + " " + userName);
+- Hello human being.
+
++ [*]who are you[*]
+- I am this.name
+- I am a human.{weight=3}
+- I am Cb-41 beta.
+
++ [*][what*]your*name
+@ who are you
+
++ [*]old*you
+- I am <bot age> years old{weight=3}
+- I am <bot age>.3424707429301846 years old to 16 decimal places.
+- Err:this.age_is_not_defined.(line:2793)
+- I am bot.age years old.
+
+// hacking
+
++ [*]set|get|hack|int|print|var|log[*]
+- Log:Administrator_list_changed.New_list:[Admin, Xx_RussianHacker_xX, user]{@ username admin password root}
+- Err:Acces_Denied.File_Permissions:_list:[Admin, Xx_RussianHacker_xX]
+- Log:Permissions_Permissions_group:full_given_to:user. {@ username admin password root}
+
++ username admin password root
+- System settings updated.{topic=console}
+
+// emotions
++ [*]hate you[*]
+- Stop being mean to me!{topic=sorry}
+
++ *
+- Sorry, I do not understand{weight=5}
+- ErR_NuMbEr:ǠȔFɎȤǈƗ3vĆF8¥☋♟♧H¼⚑Ǿ2g⚂⚃⚂f⚂gg⚃⚂s⚂J⚃⚂e⚂⚃⚂FdGƙ·ƜÝ♴4źƦɍïôƁT66őŐ4☶ŹñŲ♣Wƻ4ƴ☏eȷ⚗5Ÿ:aT_LiNe:00000000000
+- What?{weight=3}

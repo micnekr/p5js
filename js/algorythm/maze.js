@@ -19,7 +19,7 @@ function mazeCreator(grid) {
     this.algorythm();
     this.draw();
   }
-  this.backtreackerResult = function() {
+  this.backtrackerResult = function() {
     while(!backtracker.ready){
       this.algorythm();
     }

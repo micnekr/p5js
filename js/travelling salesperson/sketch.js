@@ -15,6 +15,8 @@ function setup() {
 
 function draw() {
   if(!salesperson.ready){
+    // clear the background
+    background(255);
     salesperson.bruteForceStep();
     pathsProgressOutput.html("Checked " + Math.round(salesperson.pathsChecked/salesperson.pathsNum*10000)/100 + "% of all possible paths.<br /> Best distance so far: " + salesperson.recordDist + ".");
   }else{

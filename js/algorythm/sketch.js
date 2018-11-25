@@ -4,25 +4,30 @@ let rows = 25;
 
 // canvas variable
 let canvas;
+// log
+let messageP;
 let grid;
 // start and end
 let start, end;
 // width and height
 let w, h;
-//variables of algorythms
+//objects
 let pathfinding;
 let backtracker;
 // settings
 let diagonal = true;
-let onlyPath = false; // show only path
+let onlyPath = true; // show only path
 let pathAsLine = true;
 let wallsAsLine = true;
 let randomGeneration = false;
 function setup() {
   // smallest of windowWidth and windowHeight
-  let smallestDimension = min(windowWidth - 200, windowHeight - 200);
+  let smallestDimension = min(windowWidth - 100, windowHeight - 100);
   canvas = createCanvas(smallestDimension+1, smallestDimension+1);
   canvas.parent("canvasContainer");
+  // setup text display
+  messageP = select("#message");
+  messageP.html("Calculating...");
   // setup of height of cells
   w = smallestDimension / cols;
   h = smallestDimension / rows;
@@ -41,12 +46,17 @@ function setup() {
 
 function draw() {
   background(255);
+  pathfinding.draw();
   if (!backtracker.ready) {
+     // display text
+    messageP.html("Building maze...");
      // make a step of maze generting
     backtracker.backtrackerStep();
      // visualise grid, visited cells and current
     backtracker.draw();
   } else {
+    // display text
+    messageP.html("Solving maze...");
     // make a step of pathfinding and draw
     pathfinding.aStarStep(onlyPath, pathAsLine, 1);
   }
@@ -88,10 +98,12 @@ function moveBetweenArrays(arr1, arr2, elt) {
 
 function noSolution() {
   console.log("No solution");
+  messageP.html("No solution");
   noLoop();
 }
 
 function solution() {
   console.log("Finished");
+  messageP.html("Finished");
   noLoop();
 }

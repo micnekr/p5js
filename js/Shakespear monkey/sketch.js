@@ -4,12 +4,11 @@ let dna;
 let target = "My name is Mikhail Nekrasov";
 let population;
 let canvas;
+let output;
 
 function setup() {
-  // smallest of windowWidth and windowHeight
-  let smallestDimension = min(windowWidth - 200, windowHeight - 200);
-  canvas = createCanvas(smallestDimension+1, smallestDimension+1);
-  canvas.parent("canvasContainer");
+  // select html paragraph
+  output = select("#outputBlock");
   // setup gene manager
   geneManager = new GeneManager();
   geneManager.setup();
@@ -21,10 +20,10 @@ function draw() {
   background(255);
   population.step();
   geneManager.phenotype(population.best.genes);
-  text("Target: " + target, 50, 100);
-  if(population.best.fitness == target.length){
+  output.html("Target: " + target + "<br />" + geneManager.phenotype(population.best.genes) + "<br />Current generation: " + population.generation);
+  if(population.best.fitness == pow(target.length, 4)){
     noLoop();
-    text("Finished!", 50, 200);
+    output.html("<br />Finished!", true);
     console.log("Finished!");
   }
 }
