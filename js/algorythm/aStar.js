@@ -146,12 +146,12 @@ function aStar(grid, w, h) {
       // openSet cells
       this.drawCells(this.openSet, color(0, 255, 0), false, false);
       // closedSet cells
-      this.drawCells(this.closedSet, color(255, 0, 0), false, false);
+      this.drawCells(this.closedSet, color(255, 100, 100), false, false);
     }
     // if path is line, draw line. if path is not a line, drawCell
     if (pathAsLine) {
       noFill(); // shape is recognised as shape, but not as line
-      stroke(255, 0, 200);
+      stroke(100, 100, 255);
       strokeWeight((this.w + this.h) / 4);
       // remember vertices
       beginShape();

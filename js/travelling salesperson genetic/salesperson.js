@@ -82,7 +82,6 @@ function salesPerson(drawOffset = 0) {
     if (this.recordDist > d) {
       // save the result
       this.recordDist = d;
-      console.log("The best so far: " + this.recordDist);
       // copy array, save the best path
       this.recordPath = points.slice();
     }
@@ -96,7 +95,6 @@ function salesPerson(drawOffset = 0) {
       }
     }
     if (largestX == -1) {
-      console.log("finished");
       return null;
     }
     let largestY = -1;

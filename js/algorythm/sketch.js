@@ -16,7 +16,7 @@ let pathfinding;
 let backtracker;
 // settings
 let diagonal = true;
-let onlyPath = true; // show only path
+let onlyPath = false; // show only path
 let pathAsLine = true;
 let wallsAsLine = true;
 let randomGeneration = false;

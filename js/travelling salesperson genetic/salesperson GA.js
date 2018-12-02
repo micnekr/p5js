@@ -7,8 +7,14 @@ function salesPersonGA(drawingOffset = 0) {
   this.fitnesses = [];
   // set first fitness to 0
   this.recordFitness = 0;
+  // best of the generation
+  this.thisGenBest;
+  // the best distance
+  this.recordDist = Infinity;
   // best set of cities
   this.bestRoute;
+  // is working
+  this.working = false;
   // setup
   this.Setup = function(citiesArr, populationNum) {
     // set checked paths variable to 0
@@ -22,13 +28,11 @@ function salesPersonGA(drawingOffset = 0) {
       order[k] = k;
     }
     // shuffle each dna
-    for(k = 0; k < populationNum; k++){
+    for (k = 0; k < populationNum; k++) {
       this.population[k] = shuffle(order).slice();
     }
-    // calculate all possible paths
-    this.pathsNum = totalPathsNumber(citiesArr.length);
     // start the programm
-    this.ready = false;
+    this.working = true;
   }
   this.draw = function() {
     // set fill to black
@@ -37,6 +41,19 @@ function salesPersonGA(drawingOffset = 0) {
     for (i = 0; i < this.points.length; i++) {
       ellipse(this.points[i].x, this.points[i].y + drawingOffset, 4, 4);
     }
+    if (this.working) {
+      // draw best in this generation
+      // disable fill and set stroke color
+      noFill();
+      stroke(0);
+      // draw the best attempt
+      beginShape();
+      for (i = 0; i < this.bestRoute.length; i++) {
+        vertex(this.points[this.thisGenBest[i]].x, this.points[this.thisGenBest[i]].y + drawingOffset);
+      }
+      endShape();
+    }
+    // draw best ever
     // disable fill and set stroke color
     noFill();
     stroke(255, 0, 0);
@@ -48,7 +65,7 @@ function salesPersonGA(drawingOffset = 0) {
     endShape();
   }
   // GA
-  this.GAstep = function () {
+  this.GAstep = function() {
     // calculate all fitnessses
     this.calcFitnesses();
     // setup for random picking
@@ -58,15 +75,20 @@ function salesPersonGA(drawingOffset = 0) {
     // make a new generation
     this.draw();
   }
-  this.calcFitnesses = function () {
+  this.calcFitnesses = function() {
+    let thisGenRecord = 0;
     // calculate all fitnesses
     for (var i = 0; i < this.population.length; i++) {
       // calc fitness
       let d = this.calcFitness(this.points, this.population[i]);
       // if we break the record, update record value
-      if(d > this.recordFitness){
+      if (d > this.recordFitness) {
         this.recordFitness = d;
         this.bestRoute = this.population[i];
+      }
+      if (d > thisGenRecord) {
+        this.thisGenBest = this.population[i];
+        thisGenRecord = d;
       }
       // save fitness
       this.fitnesses[i] = d;
@@ -79,15 +101,18 @@ function salesPersonGA(drawingOffset = 0) {
       // dist between city i and the next one
       let cityAindex = order[i];
       let cityA = cities[cityAindex];
-      let cityBindex = order[i+1];
+      let cityBindex = order[i + 1];
       let cityB = cities[cityBindex];
       total += dist(cityA.x, cityA.y, cityB.x, cityB.y);
     }
+    if (total < this.recordDist) {
+      this.recordDist = total;
+    }
     total = pow(total, power);
     // inverse
-    return 100/total;
+    return 100 / total;
   }
-  this.sumFitness = function () {
+  this.sumFitness = function() {
     // set summ equal to 0
     this.fitnessSumm = 0;
     for (var i = 0; i < this.fitnesses.length; i++) {
@@ -95,7 +120,7 @@ function salesPersonGA(drawingOffset = 0) {
     }
     return this.fitnessSumm;
   }
-  this.newGeneration = function () {
+  this.newGeneration = function() {
     let newGeneration = [];
     // generate the exact same amount of routes as were before
     for (var i = 0; i < this.population.length; i++) {
@@ -104,20 +129,20 @@ function salesPersonGA(drawingOffset = 0) {
     this.population = newGeneration.slice();
     // console.log(newGeneration);
   }
-  this.newRoute = function () {
+  this.newRoute = function() {
     // pick a random according to fitnesses
     let tempRoute = this.pickOne();
     // mutate
     let finalRoute = this.mutate(tempRoute);
     return finalRoute;
   }
-  this.mutate = function (route) {
+  this.mutate = function(route, mutationRate) {
     indA = floor(random(route.length));
-    indB= floor(random(route.length));
+    indB = floor(random(route.length));
     route = swap(route, indA, indB);
     return route;
   }
-  this.pickOne = function () {
+  this.pickOne = function() {
     var indexForPicking = 0;
     var r = random(0, this.fitnessSumm);
 
@@ -131,7 +156,7 @@ function salesPersonGA(drawingOffset = 0) {
 }
 
 // calculations
- function totalPathsNumber (pointsNum) {
+function totalPathsNumber(pointsNum) {
   let pathsNum = factorial(pointsNum);
   return pathsNum;
 }

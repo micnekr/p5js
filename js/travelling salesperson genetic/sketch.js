@@ -2,7 +2,7 @@ let salespersonGA;
 let salesperson;
 let pathsProgressOutput;
 let cities = [];
-let citiesNum = 10;
+let citiesNum = 6;
 
 function setup() {
   // smallest of windowWidth and windowHeight
@@ -15,7 +15,7 @@ function setup() {
   }
   // make a new travelling salesperson solver
   salespersonGA = new salesPersonGA();
-  salespersonGA.Setup(cities, 300);
+  salespersonGA.Setup(cities, 2);
   salesperson = new salesPerson(height/2);
   salesperson.Setup(cities);
   // select output text
@@ -25,12 +25,22 @@ function setup() {
 function draw() {
   // clear the background
   background(255);
-  salespersonGA.GAstep();
   if(!salesperson.ready){
+    salespersonGA.GAstep();
     salesperson.bruteForceStep();
-    pathsProgressOutput.html("Checked " + Math.round(salesperson.pathsChecked/salesperson.pathsNum*10000)/100 + "% of all possible paths.<br /> Best distance so far: " + salesperson.recordDist + ".");
+    let bestDist = min(salesperson.recordDist, salespersonGA.recordDist);
+    pathsProgressOutput.html("Checked " + Math.round(salesperson.pathsChecked/salesperson.pathsNum*10000)/100 + "% of all possible paths.<br /> Best distance so far: " + bestDist + ".");
+    if(salesperson.recordDist > salespersonGA.recordDist){
+      pathsProgressOutput.html("<br /> Lexicographical algorythm is leading!", true);
+    }else if(salesperson.recordDist < salespersonGA.recordDist){
+      pathsProgressOutput.html("<br /> Genetical algorythm is leading!", true);
+    }else{
+      pathsProgressOutput.html("<br /> Both algorythms have the same result!", true);
+    }
   }else{
-    pathsProgressOutput.html("Finished! The best distance is :" + salesperson.recordDist + ".");
+    salespersonGA.working = false;
+    pathsProgressOutput.html("Finished! The best distance is: " + salesperson.recordDist + ".");
+    salespersonGA.draw();
     salesperson.draw();
   }
 }

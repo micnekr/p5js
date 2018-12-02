@@ -20,6 +20,6 @@ function draw() {
     salesperson.bruteForceStep();
     pathsProgressOutput.html("Checked " + Math.round(salesperson.pathsChecked/salesperson.pathsNum*10000)/100 + "% of all possible paths.<br /> Best distance so far: " + salesperson.recordDist + ".");
   }else{
-    pathsProgressOutput.html("Finished! The best distance is :" + salesperson.recordDist + ".");
+    pathsProgressOutput.html("Finished! The best distance is: " + salesperson.recordDist + ".");
   }
 }

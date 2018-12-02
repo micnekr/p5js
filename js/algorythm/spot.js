@@ -35,13 +35,6 @@ function Spot(x, y, w, h, grid, wallsAsLine, randomGeneration) {
     // create x and y
     let x = this.x * w;
     let y = this.y * h;
-    // array of walls positions
-    let walls = [
-      [x, y, x + w, y],
-      [x + w, y, x + w, y + h],
-      [x + w, y + h, x, y + h],
-      [x, y + h, x, y]
-    ];
     if (wallsAsLine) {
       // if walls as line
       // set stroke

@@ -29,7 +29,7 @@ function mazeCreator(grid) {
     for (i = 0; i < cols; i++) {
       for (j = 0; j < rows; j++) {
         if (grid[i][j].mazeVisited) {
-          grid[i][j].drawCell(color(255, 0, 255, ), false, false);
+          grid[i][j].drawCell(color(100, 100, 255), false, false);
         }
       }
     }
