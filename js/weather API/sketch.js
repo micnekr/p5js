@@ -1,7 +1,7 @@
                         // variables
 //url settings
-let urlCurrentWeather = "http://api.openweathermap.org/data/2.5/weather?q=";
-let urlForecast = "http://api.openweathermap.org/data/2.5/forecast?q=";
+let urlCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?q=";
+let urlForecast = "https://api.openweathermap.org/data/2.5/forecast?q=";
 let urlReplyMode = "&mode=json";
 let urlMetric = "&units=metric";
 let apiKey = "&APPID=3a2579f41685a68c39457b5e3d53743d";
