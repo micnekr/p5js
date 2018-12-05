@@ -25,36 +25,6 @@
 
 < topic
 
-// easter egg for launching nuclear missles
-> topic _launch_nuclear_missles
-// ask user to launch nuclear rockets
-+ [*]launch[*]
-- Alert:_launch_nuclear_missles? <br />
-^ -Yes. <br />
-^ -No.
-
-// if user says yes
-+ yes
-- Password:----
-
-// ask for passsword
-+ #
-% password
-* <star> == 0000 => Launching rockets...{topic=hacked_pentagon}
-- Wrong password.
-
-// if user said no, leave
-+ no
-- Log:operation_cancelled{topic=hacked_pentagon}
-
-// catch()
-+ *
-- Err:expression_not_found <br />  {@ launch}
-- Err:No_permission <br />  {@ launch}
-- Err:unknown_error.Err.code:0000 <br />  {@ launch}
-
-< topic
-
 // hacking console
 >topic console
 
@@ -80,18 +50,12 @@
 
 > topic hacked_pentagon
 
-//  commands
-
-+ launch
-- {topic=_launch_nuclear_missles}{@ launch}
-
 + exit
 - Terminating process...{topic=random}
 
 // help
 + help
-- launch - launch nuclear missles <br />
-^ exit - exit console.
+- exit - exit console.
 
 // catcher
 + *

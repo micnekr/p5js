@@ -5,13 +5,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Chat bot</title>
+	<title>Colour classifier with Tensorflow.js</title>
 	<script src="libraries/p5.js"></script>
-	<script src="libraries/p5.dom.js"></script>
-	<script src="libraries/p5.speech.js"></script>
-	<script src="libraries/rivescript.js"></script>
+	<!-- <script src="libraries/p5.dom.js"></script>
+	<script src="libraries/p5.sound.js"></script> -->
+	<script src="TF.js"></script>
 	<script src="sketch.js"></script>
-
+	<script src="formated.json"></script>
+	<!-- <script src="formater.js"></script> -->
+	<!-- <script src="colorData.json"></script> -->
 
 	<style>
 	html {  }
@@ -31,16 +33,10 @@
 	<center>
 	<!-- header -->
 	<div>
-		<h1>Chat bot<h1>
+		<h1>Colour classifier with Tensorflow.js<h1>
 	</div>
-	<!-- user input -->
-	<div>
-		Write: <input id = "userInputText"></input>
-		<button id = "submit">submit</button>
-	</div>
-	<!-- bot output -->
-	<div>
-		<p id = "output"></p>
+	<!-- Canvas -->
+	<div id = "canvasContainer">
 	</div>
 	</center>
 	<!-- link to project page -->

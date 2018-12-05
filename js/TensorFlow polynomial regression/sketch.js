@@ -13,10 +13,10 @@ function setup() {
   let smallestDimension = min(windowWidth - 100, windowHeight - 100);
   canvas = createCanvas(smallestDimension+1, smallestDimension+1);
   canvas.parent("canvasContainer");
-  guessLine.a = tf.variable(tf.scalar(1));
-  guessLine.b = tf.variable(tf.scalar(1));
-  guessLine.c = tf.variable(tf.scalar(1));
-  guessLine.d = tf.variable(tf.scalar(1));
+  guessLine.a = tf.variable(tf.scalar(0));
+  guessLine.b = tf.variable(tf.scalar(0));
+  guessLine.c = tf.variable(tf.scalar(0));
+  guessLine.d = tf.variable(tf.scalar(0));
   optimizer = tf.train.adam(learningRate);
 }
 
