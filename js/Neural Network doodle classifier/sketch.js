@@ -64,7 +64,7 @@ function setup() {
 }
 
 function draw() {
-  if(mouseIsPressed){
+  if (mouseIsPressed) {
     stroke(0);
     strokeWeight(5);
     line(pmouseX, pmouseY, mouseX, mouseY);
@@ -89,20 +89,20 @@ function separateData(category, data, label) {
 }
 
 function epoch(trainingData) {
-  // randomize data
-  shuffle(trainingData, true);
-  // foreach data
-  for (var i = 0; i < trainingData.length; i++) {
-    let data = trainingData[i];
-    let label = data.label;
-    // map from 0 to 1
-    let inputs = Array.from(data).map(x => x / 255);
-    // outputs
-    let targets = [0, 0, 0];
-    targets[label] = 1;
-    // train
-    nn.train(inputs, targets);
-  }
+    // randomize data
+    shuffle(trainingData, true);
+    // foreach data
+    for (var i = 0; i < trainingData.length; i++) {
+      let data = trainingData[i];
+      let label = data.label;
+      // map from 0 to 1
+      let inputs = Array.from(data).map(x => x / 255);
+      // outputs
+      let targets = [0, 0, 0];
+      targets[label] = 1;
+      // train
+      nn.train(inputs, targets);
+    }
 }
 
 function test(testingData) {
@@ -126,7 +126,7 @@ function test(testingData) {
 function startTraining() {
   // train!
   console.log("Training...");
-  document.getElementById("stateText").innerHTML="Training...";
+  document.getElementById("stateText").innerHTML = "Training...";
   epoch(trainingData);
   // test!
   let percentRight = test(testingData);
@@ -141,8 +141,8 @@ function reduce() {
   img.resize(28, 28);
   img.loadPixels();
   for (var i = 0; i < len; i++) {
-    let brightness = img.pixels[i*4];
-    inputs[i] = 1 - (brightness/255);
+    let brightness = img.pixels[i * 4];
+    inputs[i] = 1 - (brightness / 255);
   }
   let result = classify(inputs);
   let guessedLabel;

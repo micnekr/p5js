@@ -1,11 +1,14 @@
 //                                variables
 let learningRate = 0.2;
 
+let modelFiles = [];
+let outP;
 let r, g, b;
 let training = false;
 let guessedLabel;
 let trainingLog;
 let canvas;
+let filesInput = [];
 let trainingData = {};
 let testingData = {};
 let labelList = [
@@ -39,6 +42,35 @@ function setup() {
   let smallestDimension = min(windowWidth - 100, windowHeight - 100);
   canvas = createCanvas(smallestDimension+1, smallestDimension+1);
   canvas.parent("canvasContainer");
+  outP = select("#outP");
+  let saveButton = select("#saveButton");
+  saveButton.mousePressed(saveModel);
+  let loadButton = select("#loadButton");
+  loadButton.mousePressed(() => {
+    if(filesInput[0].files.length == 1 && filesInput[1].files.length == 1){
+      tf.loadModel(tf.io.browserFiles([filesInput[0].files[0], filesInput[1].files[0]]))
+      .then((model) => {
+        console.log("Model loaded");
+        nn = model;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  });
+  let trainButton = select("#trainButton");
+  trainButton.mousePressed(() => {
+    outP.html("Training...");
+    console.log("Training...");
+    train().then((r)=>{
+      randomColour();
+      // console.log(r.history.loss);
+    });
+  });
+
+
+  filesInput[0] = document.getElementById('jsonFile');
+  filesInput[1] = document.getElementById('binFile');
 
   nn.add(h1);
   nn.add(outputL);
@@ -48,21 +80,16 @@ function setup() {
   });
 
   textAlign(CENTER);
-  text("Training...", width/2, height/2);
-  console.log("Training...");
-  train().then((r)=>{
-    randomColour();
-    // console.log(r.history.loss);
-  });
+  randomColour();
 }
 let x = 0
 function draw() {
   if(training){
     background(255);
     if(trainingLog != undefined){
-      text("Training, loss is " + trainingLog, width/2, height/2);
+      outP.html("Training, loss is " + trainingLog);
     }else{
-      text("Training...", width/2, height/2);
+      outP.html("Training...");
     }
     line(x, 100, 0, 100);
     x++;
@@ -71,7 +98,7 @@ function draw() {
     }
   }else{
     background(r, g, b);
-    text("The predicted colour name is  " + guessedLabel, width/2, height/2);
+    outP.html("The predicted colour name is  " + guessedLabel);
   }
 }
 
@@ -86,7 +113,7 @@ async function train() {
   let result = await nn.fit(colours, labels, {
     shuffle:true,
     validationSplit: 0.1,
-    epochs:1,
+    epochs:2,
     callbacks:{
       onEpochEnd:(num, log) =>{
         console.log("Loss:" + log.val_loss);
@@ -115,10 +142,16 @@ function randomColour() {
 function guess() {
   let input = tf.tensor2d([[r/255, g/255, b/255]]);
   let output = nn.predict(input);
-  output.print();
-  let results = output.argMax(1).dataSync();
-  console.log(results);
+  // output.print();
+  let results = output.argMax(1);
+  let index = results.dataSync()[0];
+  // console.log(results);
   input.dispose();
   output.dispose();
-  return labelList[results[0]];
+  results.dispose();
+  return labelList[index];
+}
+
+function saveModel() {
+  nn.save('downloads://my-model-1');
 }
