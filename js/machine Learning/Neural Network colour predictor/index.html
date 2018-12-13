@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Maze</title>
+	<title>Neural network colour predictor</title>
 	<script src="libraries/p5.js"></script>
 	<script src="libraries/p5.dom.js"></script>
 	<script src="libraries/p5.sound.js"></script>
 	<script src="sketch.js"></script>
-	<script src="spot.js"></script>
-	<script src="aStar.js"></script>
-	<script src="maze.js"></script>
-	<script src="grid.js"></script>
+	<script src="neural/NN.js"></script>
+	<script src="neural/matrix.js"></script>
 
 	<style>
 	html {  }
@@ -34,28 +31,16 @@
 	<center>
 	<!-- header -->
 	<div>
-		<h1>Maze constructor and solver<h1>
+		<h1>Neural network colour predictor<h1>
 	</div>
 	<!-- Canvas -->
 	<div id = "canvasContainer">
 	</div>
-	<!-- output message -->
-	<div>
-		<p id = "message"></p>
-	</div>
 	</center>
-	<!-- description -->
-	<div>
-		<p>
-				This sketch shows two algorythms:
-			<a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">recursive backtracker for building mazes</a> and
-			<a href="../projectsPage/">A* pathfinding algorythm</a>
-		</p>
-	</div>
 	<!-- link to project page -->
 	<div>
 		<p>
-			<a href="../projectsPage/">&lt=back</a>
+			<a href="..">&lt=back</a>
 		</p>
 	</div>
 </body>

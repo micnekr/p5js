@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Maze</title>
+	<title>Neural network doodle classifier</title>
 	<script src="libraries/p5.js"></script>
 	<script src="libraries/p5.dom.js"></script>
 	<script src="libraries/p5.sound.js"></script>
 	<script src="sketch.js"></script>
-	<script src="spot.js"></script>
-	<script src="aStar.js"></script>
-	<script src="maze.js"></script>
-	<script src="grid.js"></script>
+	<script src="loadBytes.js"></script>
+	<script src="neural/NN.js"></script>
+	<script src="neural/matrix.js"></script>
+	<script src="data/cat5000.bin"></script>
+	<script src="data/circle5000.bin"></script>
+	<script src="data/coffee5000.bin"></script>
 
 	<style>
 	html {  }
@@ -23,6 +24,7 @@
 			padding: 0;
 			overflow-x: hidden;
 			overflow-y: scroll;
+			background-color: #AAA;
 		}
 
 		canvas {
@@ -34,28 +36,26 @@
 	<center>
 	<!-- header -->
 	<div>
-		<h1>Maze constructor and solver<h1>
+		<h1>Neural network doodle classifier<h1>
 	</div>
 	<!-- Canvas -->
 	<div id = "canvasContainer">
 	</div>
-	<!-- output message -->
+	<!-- button for training -->
 	<div>
-		<p id = "message"></p>
+		<p id="stateText"></p>
+	</div>
+	<!-- button for training -->
+	<div align="left">
+		<button id = "train">Train</button>
+		<!-- button for clearing -->
+		<button id = "clearButton">clear</button>
 	</div>
 	</center>
-	<!-- description -->
-	<div>
-		<p>
-				This sketch shows two algorythms:
-			<a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">recursive backtracker for building mazes</a> and
-			<a href="../projectsPage/">A* pathfinding algorythm</a>
-		</p>
-	</div>
 	<!-- link to project page -->
 	<div>
 		<p>
-			<a href="../projectsPage/">&lt=back</a>
+			<a href="..">&lt=back</a>
 		</p>
 	</div>
 </body>

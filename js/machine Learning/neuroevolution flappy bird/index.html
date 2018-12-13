@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Flappy bird</title>
+	<script src="libraries/p5.js"></script>
+	<!-- <script src="libraries/p5.dom.js"></script> -->
+	<!-- <script src="libraries/p5.sound.js"></script> -->
+	<script src="sketch.js"></script>
+	<script src="pipe.js"></script>
+	<script src="bird.js"></script>
+	<script src="GA.js"></script>
+	<script src="neural/NN.js"></script>
+	<script src="neural/matrix.js"></script>
+
+	<style>
+		html {  }
+		body {
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		canvas {
+			margin: auto;
+		}
+		.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+	</style>
+</head>
+
+<body>
+	<center>
+		<!-- header -->
+		<div>
+			<h1 class="unselectable">Flappy bird<h1>
+		</div>
+		<!-- Canvas -->
+		<div id="canvasContainer">
+		</div>
+		<div>
+			<input type="range" min="1" max="100" value="1" class="slider" oninput="sliderMoved()" id="myRange">
+		</div>
+	</center>
+	<!-- link to project page -->
+	<div>
+		<p>
+			<a class="unselectable" href="..">&lt=back</a>
+		</p>
+	</div>
+</body>
+
+</html>

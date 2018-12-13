@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Nearest neighbour recommendation</title>
+	<script src="libraries/p5.js"></script>
+	<script src="libraries/p5.dom.js"></script>
+	<script src="libraries/p5.sound.js"></script>
+	<script src="score.js"></script>
+	<script src="bestNeighbours.js"></script>
+
+	<style>
+		html {}
+
+		body {
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		canvas {
+			margin: auto;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<!-- header -->
+		<div>
+			<h1>Nearest Neighbour recommendation<h1>
+		</div>
+		<!-- suggestion -->
+		<div>
+			<!-- div for results -->
+			<div id="resultDiv">
+			</div>
+			<!-- rating selection -->
+			<div id="ratingSelect" align = "left">
+			</div>
+			<!-- submit button -->
+			<button id="submit">submit</button>
+		</div>
+	</center>
+	<!-- link to project page -->
+	<div>
+		<p>
+			<a href="..">&lt=back</a>
+		</p>
+	</div>
+</body>
+
+</html>
