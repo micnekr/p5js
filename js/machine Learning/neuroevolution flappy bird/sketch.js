@@ -27,7 +27,7 @@ function setup() {
 
   // add birds to population
   for (var i = 0; i < birdsNum; i++) {
-    bird = new Bird(birdJump, width / 3);
+    bird = new Bird(birdJump, width / 3, width/10);
     birds.push(bird);
   }
 }
@@ -46,29 +46,35 @@ function draw() {
 
     // foreach pipe
     let nextPipe;
+    let pipesToSlice = [];
     for (i = 0; i < pipes.length; i++) {
       let pipe = pipes[i];
-      // move and draw
-      pipe.update();
-      //get the nearest pipe
-      if (nextPipe == undefined) {
-        if (width / 3 < pipe.x + pipe.width) {
-          nextPipe = pipe;
-        }
-      }
-      // check if colliding with any birds
-      for (var birdIndex in birds) {
-        let bird = birds[birdIndex];
-        let touches = pipe.collides(bird);
-        if (touches == true) {
-          birdsHistory.push(birds.splice(birdIndex, 1)[0]);
-        }
-      }
       // discard a pipe if out of boundries
       if (pipe.offScreen) {
-        pipes.splice(i, 1);
+        pipesToSlice.push(i);
+      }else{
+        // move and draw
+        pipe.update();
+        //get the nearest pipe
+        if (nextPipe == undefined && birds.length != 0) {
+          if (birds[0].x < pipe.x + pipe.width) {
+            nextPipe = pipe;
+          }
+        }
+        // check if colliding with any birds
+        for (var birdIndex in birds) {
+          let bird = birds[birdIndex];
+          let touches = pipe.collides(bird);
+          if (touches == true) {
+            birdsHistory.push(birds.splice(birdIndex, 1)[0]);
+          }
+        }
       }
     }
+    for (var i = 0; i < pipesToSlice.length; i++) {
+      pipes.splice(pipesToSlice[i], 1);
+    }
+    console.log(nextPipe);
     // if no next pipes, create a new
     if (nextPipe == undefined) {
       nextPipe = new Pipe(4, 30, 100, 300);
@@ -78,7 +84,7 @@ function draw() {
 
 
 
-    
+
     for (var birdIndex in birds) {
       // add gravity, make a descision, apply update
       let bird = birds[birdIndex];

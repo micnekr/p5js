@@ -15,7 +15,7 @@ function setup() {
   }
   // make a new travelling salesperson solver
   salespersonGA = new salesPersonGA();
-  salespersonGA.Setup(cities, 2);
+  salespersonGA.Setup(cities, 5);
   salesperson = new salesPerson(height/2);
   salesperson.Setup(cities);
   // select output text
@@ -30,9 +30,9 @@ function draw() {
     salesperson.bruteForceStep();
     let bestDist = min(salesperson.recordDist, salespersonGA.recordDist);
     pathsProgressOutput.html("Checked " + Math.round(salesperson.pathsChecked/salesperson.pathsNum*10000)/100 + "% of all possible paths.<br /> Best distance so far: " + bestDist + ".");
-    if(salesperson.recordDist > salespersonGA.recordDist){
+    if(salesperson.recordDist < salespersonGA.recordDist){
       pathsProgressOutput.html("<br /> Lexicographical algorythm is leading!", true);
-    }else if(salesperson.recordDist < salespersonGA.recordDist){
+    }else if(salesperson.recordDist > salespersonGA.recordDist){
       pathsProgressOutput.html("<br /> Genetical algorythm is leading!", true);
     }else{
       pathsProgressOutput.html("<br /> Both algorythms have the same result!", true);

@@ -2,6 +2,10 @@ function Pipe(speed, pWidth, minGap = 200, maxGap = 400) {
   this.x = width;
   this.width = pWidth;
   this.offScreen = false;
+  if(height-maxGap <= 0){
+    maxGap = height/3;
+    minGap = 2*maxGap/3;
+  }
   this.gapY = random(0, height - maxGap);
   this.gapH = random(minGap, maxGap);
   this.passed = false;

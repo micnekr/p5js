@@ -1,7 +1,7 @@
                             // variables
 let geneManager;
 let dna;
-let target = "Hello!";
+let target = "Hello, this is an example of a genetic algorythm.";
 let population;
 let canvas;
 let output;

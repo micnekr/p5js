@@ -1,6 +1,6 @@
 // number of rows and columns
-let cols = 25;
-let rows = 25;
+let cols = 10;
+let rows = 10;
 
 // canvas variable
 let canvas;
