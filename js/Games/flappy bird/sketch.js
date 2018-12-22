@@ -3,6 +3,7 @@ let canvas;
 let bird;
 let pipes = [];
 let pipeRate = 100;
+let pipeFrame = 0;
 let score = 0;
 const gravity = 0.7;
 
@@ -13,11 +14,10 @@ function setup() {
   canvas = createCanvas(smallestDimension + 1, smallestDimension + 1);
   canvas.parent("canvasContainer");
 
-  bird = new Bird(10, width / 3, width/10);
+  bird = new Bird(15, width / 3, width/15);
 
   textAlign(CENTER);
 
-  pipes.push(new Pipe(4, 30))
 }
 
 function draw() {
@@ -29,7 +29,7 @@ function draw() {
 
   let pipesToSlice = [];
   // add pipes every pipeRate seconds
-  if (frameCount % pipeRate == 0) {
+  if (pipeFrame % pipeRate == 0) {
     pipes.push(new Pipe(4, 30))
   }
 
@@ -51,9 +51,18 @@ function draw() {
         score++
       }
     }
-    for (var i = 0; i < pipesToSlice.length; i++) {
-      pipes.splice(pipesToSlice[i], 1);
+  }
+  // delete pipes if offScreen
+  for (var i = pipes.length - 1; i > 0; i--) {
+    if(pipes[i].offScreen){
+      pipes.splice(i, 1);
     }
+  }
+  // if no next pipes, create a new
+  if (pipes.length == 0) {
+    let nextPipe = new Pipe(4, 30, 100, 300);
+    pipes.push(nextPipe);
+    pipeFrame = 0;
   }
   // BIRD
 
@@ -69,7 +78,7 @@ function draw() {
   if (bird.y < 0 || bird.y > height) {
     return gameOver();
   }
-
+  pipeFrame++;
   // score
   fill(0, 255, 0);
   textSize(16);

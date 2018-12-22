@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Markov chains words</title>
+	<script src="libraries/p5.js"></script>
+	<script src="libraries/p5.dom.js"></script>
+	<!-- <script src="libraries/p5.sound.js"></script> -->
+	<script src="sketch.js"></script>
+
+	<style>
+	html {  }
+		body {
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		canvas {
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<center>
+	<!-- header -->
+	<div>
+		<h1>Markov chains based on words<h1>
+	</div>
+	<!-- text -->
+	<textarea id="textbox" rows="20" cols="70">This is a simple text for testing Markov chains. If you want, you can change it.</textarea>
+Use preloaded text?<input type="checkbox" id="full" onclick="changeSample()">
+	</center>
+	<p id="output"></p>
+	<!-- link to project page -->
+	<div>
+		<p>
+			<a href="../projectsPage/">&lt=back</a>
+		</p>
+	</div>
+</body>
+</html>

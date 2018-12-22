@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Chatbot library</title>
+	<script src="libraries/p5.js"></script>
+	<script src="libraries/p5.dom.js"></script>
+	<script src="libraries/chatbot.js"></script>
+	<script src="libraries/p5.speech.js"></script>
+	<!-- <script src="libraries/p5.sound.js"></script> -->
+	<script src="sketch.js"></script>
+
+	<style>
+	html {  }
+		body {
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		canvas {
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<center>
+	<!-- header -->
+	<div>
+		<h1>Chatbot library<h1>
+	</div>
+	<!-- user input -->
+	<div>
+		Write: <input id = "userInputText" value="Start text"></input>
+		<button id = "submit">submit</button>
+	</div>
+	<!-- bot output -->
+	<div>
+		<p id = "output"></p>
+	</div>
+	</center>
+	<!-- link to project page -->
+	<div>
+		<p>
+			<a href="../projectsPage/">&lt=back</a>
+		</p>
+	</div>
+</body>
+</html>
