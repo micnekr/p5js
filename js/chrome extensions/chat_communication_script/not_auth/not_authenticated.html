@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>chat</title>
+
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
+  <script src="../jquery.js" charset="utf-8"></script>
+  <script src="../on_popup_load.js" charset="utf-8"></script>
+  <script src="not_authenticated.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <div class="page_container">
+    <div class="header">
+      <h1 class="login-message" align="center">Please, log in</h1>
+    </div>
+    <div class="errorMessage">Please, enable javascript to proceed.</div>
+    <div class="login-box">
+      <form id="form" class="login-form" action="">
+        <label for="username"><b>Username</b></label>
+        <input id="username" type="text" placeholder="Enter Username" name="username" required>
+
+        <label for="password"><b>Password</b></label>
+        <input id="password" type="password" placeholder="Enter Password" name="password" required>
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

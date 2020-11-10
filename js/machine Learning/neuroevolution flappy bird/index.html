@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Flappy bird</title>
+	<title>Flappy bird neuroevolution</title>
 	<script src="libraries/p5.js"></script>
 	<!-- <script src="libraries/p5.dom.js"></script> -->
 	<!-- <script src="libraries/p5.sound.js"></script> -->
@@ -44,15 +44,20 @@
 	<center>
 		<!-- header -->
 		<div>
-			<h1 class="unselectable">Flappy bird<h1>
+			<h1 class="unselectable">Flappy bird neuroevolution<h1>
 		</div>
 		<!-- Canvas -->
 		<div id="canvasContainer">
 		</div>
 		<div>
+			Change speed:
 			<input type="range" min="1" max="100" value="1" class="slider" oninput="sliderMoved()" id="myRange">
 		</div>
 	</center>
+	<!--description-->
+	<div>
+		<p>This sketch is using a genetic algorithm and neural networks to train a neural network to play flappy bird game.</p>
+	</div>
 	<!-- link to project page -->
 	<div>
 		<p>

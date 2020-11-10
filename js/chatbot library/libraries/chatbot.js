@@ -7,16 +7,19 @@ class Chatbot {
     this.answers = {};
     this.division = {
       "+ ": {
-        "script": "mode = QUESTION;",
-        "regexp": "\\+ "
+        "script": undefined,
+        "regexp": "\\+ ",
+        "mode": QUESTION
       },
       "- ": {
-        "script": "mode = ANSWER;",
-        "regexp": "\\- "
+        "script": undefined,
+        "regexp": "\\- ",
+        "mode": ANSWER
       },
       "var ": {
-        "script": "mode = VARIABLE",
-        "regexp": "var "
+        "script": undefined,
+        "regexp": "var ",
+        "mode": VARIABLE
       }
     };
     this.variables = {};
@@ -41,11 +44,6 @@ class Chatbot {
     // divide into lines
     let lines = this.lineBrDiv(text);
 
-    // // if starts without +
-    // if (lines[0] != "+ ") {
-    //   throw Error("Requests should start with +");
-    // } // TODO: change error detection
-
     // execution mode
     let mode = 1; //0==add QUESTION , 1== add ANSWER, 2== add VARIABLE
     // key for a stranswers
@@ -56,7 +54,11 @@ class Chatbot {
     for (let expr of lines) {
       // if is a division string, execute it
       if (this.division[expr] != undefined) {
-        eval(this.division[expr].script);
+        if (this.division[expr].script == undefined) {
+          mode = this.division[expr].mode;
+        } else {
+          eval(this.division[expr].script);
+        }
       } else {
         switch (mode) {
           // if is a key, prepare it and save
@@ -181,7 +183,7 @@ class Chatbot {
     }
 
     // bind this for a callback
-    answer = answer.replace(/#(\w+)\s*=?\s*(\w*)#/g, this.varRegExpReplacer);
+    answer = this.bracketsParse(answer)
     return answer;
   }
 
@@ -193,18 +195,53 @@ class Chatbot {
     this.variables[varMatch[1]] = varMatch[2];
   }
 
-  varRegExpReplacerFun() {
-    let name = arguments[1];
-    let value = arguments[2];
-    if (value == "") {
-      return this.variables[name];
+  bracketsParse(text, opening = "<", closing = ">") {
+    // if needs expanding
+    if (text.indexOf(opening) == -1) {
+      return text;
     } else {
-      this.variables[name] = value;
-      return "";
+      let output = "";
+      let level = 0;
+      let found = false;
+      let index = text.length;
+      for (let charI in text) {
+        let char = text[charI];
+        if (char == opening) {
+          level++;
+          found = true;
+        } else if (char == closing) {
+          level--;
+          found = true;
+        }
+        // if )(
+        if (level < 0) {
+          throw Error("Brackets mismatch in " + text);
+        }
+        if (char == closing && found && level == 0) {
+          index = Number(charI);
+          break;
+        }
+      }
+      let brackets = [];
+      brackets[0] = text.substring(0, text.indexOf(opening));
+      brackets[1] = text.substring(text.indexOf(opening) + 1, index);
+      brackets[2] = text.substring(index + 1, text.length);
+      console.log(brackets);
+      for (let pieceI in brackets) {
+        let piece = brackets[pieceI];
+        if (piece.indexOf("=") != -1 && this.variables[piece.substring(1, piece.indexOf("=") - 1)] != undefined && pieceI == 1) {
+          // right and left parts
+          let rP = piece.substring(piece.indexOf("=") + 1, piece.length);
+          rP = this.bracketsParse(rP);
+          let lP = piece.substring(1, piece.indexOf("=") - 1);
+          this.variables[lP] = eval(rP);
+        } else if (this.variables[piece] != undefined) {
+          output += this.variables[piece];
+        } else {
+          output += this.bracketsParse(piece, opening, closing);
+        }
+      }
+      return output;
     }
-  }
-
-  varRegExpReplacer() {
-    return varRegExpReplacerFun.bind(this)
   }
 }

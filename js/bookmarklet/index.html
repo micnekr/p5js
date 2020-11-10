@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>bookmarklet</title>
+
+	<style>
+	html {  }
+		body {
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+		}
+
+		canvas {
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<center>
+	<!-- header -->
+	<div>
+		<h1>bookmarklet<h1>
+	</div>
+	<p>Drag this <a href="javascript:(function() {
+	  let script = document.createElement('script');
+	  script.src='http://127.0.0.1:3000/bookmarklet/bookmarklet.js';
+	  document.body.append(script);
+	})();">link<a/> on bookmarks panel and click it.</p>
+	<!--description-->
+	<div>
+		<p>This simple bookmarklet replaces all text it could find with my cat's name, Alice when bookmarklet icon is pressed.</p>
+	</div>
+	</center>
+	<!-- link to project page -->
+	<div>
+		<p>
+			<a href="../projectsPage/">&lt=back</a>
+		</p>
+	</div>
+</body>
+</html>

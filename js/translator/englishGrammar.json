@@ -1,0 +1,29 @@
+{
+  "#sentence": [
+    "#subj #verb #obj"
+  ],
+  "#subj": [
+    "#obj"
+  ],
+  "#art": [
+    "the",
+    "a",
+    "an"
+  ],
+  "#noun": [
+    "dog",
+    "cat",
+    "man",
+    "woman",
+    "robot"
+  ],
+  "#verb": [
+    "bit",
+    "kicked",
+    "stroked"
+  ],
+  "#obj": [
+    "#art #noun",
+    "two furry dice"
+  ]
+}

@@ -15,7 +15,7 @@ let samlpe;
 let chain;
 
 // settings
-let order = 2;
+let order = 1;
 let len = 500;
 
 function preload() {
@@ -37,8 +37,8 @@ function setup() {
   txt = txt.split(/\W+/);
   output = select("#output");
   textbox = select("#textbox");
-  textbox.input(()=>{
-    if(!document.getElementById("full").checked){
+  textbox.input(() => {
+    if (!document.getElementById("full").checked) {
       sample = textbox.value().split(/\W+/);
       chain.learn(sample);
       output.html(chain.generate(len));
@@ -52,7 +52,7 @@ function setup() {
 function changeSample() {
   if (document.getElementById("full").checked) {
     sample = txt.slice();
-  }else{
+  } else {
     sample = textbox.value().split(/\W+/);
   }
   chain.learn(sample);
@@ -70,34 +70,34 @@ class Markov {
     this.data;
   }
 
-  learn(data){
+  learn(data) {
     this.data = data;
     this.ngrams = {};
-    for (var i = 0; i < data.length-this.order+1; i++) {
-      let gram = data.slice(i, i+this.order);
+    for (var i = 0; i < data.length - this.order + 1; i++) {
+      let gram = data.slice(i, i + this.order);
       gram = gram.join(" ");
-      if(this.ngrams[gram] == undefined){
+      if (this.ngrams[gram] == undefined) {
         this.ngrams[gram] = [];
       }
-      this.ngrams[gram].push(data[i+this.order]);
+      this.ngrams[gram].push(data[i + this.order]);
     }
   }
 
-  generate(len){
+  generate(len) {
     let output = "";
     // starting points
     let current = this.data.slice(0, this.order).join(" ");
     output += current;
     for (var i = 0; i < len; i++) {
       let possibilities = this.ngrams[current];
-      if(possibilities == undefined){
+      if (possibilities == undefined) {
         break;
       }
       let next = random(possibilities);
-      if(next!=undefined){
+      if (next != undefined) {
         output += " " + next;
         output = output.split(/\W+/);
-        current = output.slice(output.length-this.order, output.length).join(" ");
+        current = output.slice(output.length - this.order, output.length).join(" ");
         output = output.join(" ");
       }
     }

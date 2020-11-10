@@ -9,7 +9,7 @@ let text = {
   "plot": "His #second# was lost, so #name# wanted to save him.\n By the way, the #hero#`s name was #name#.\n  So he went to #place# and #endings#",
 
   "robot": "saw a robot there.\n As #hero# was good at programming, he changed the robot`s programm to find #name#`s #second#.\n The robot completed the task in less than #time.a#. The #hero# was so #happy#, so he made the robot tell others his story. He also was shy, so he changed something in it.\n\n#start#",
-  "found": "found #second# there.",
+  "found": "found his #second# there.",
   "endings": ["#robot#", "#found#"],
   "characters": ["knight", "dragon", "sailor", "prince"],
   "secondCh": ["friend", "father", "brother", "son"],

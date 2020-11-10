@@ -12,7 +12,7 @@ var age = 20
 - Ok
 
 + [*]how*old*[are]*you[*]
-- I am #age# years old
+- I am <age> years old<<age>=<age>+1>
 
 + [*]
 - not found "<star1>"

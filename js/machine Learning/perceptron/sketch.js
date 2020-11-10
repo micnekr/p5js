@@ -2,7 +2,7 @@
 let canvas;
 let perceptron;
 let points = [];
-let pointsNum = 500;
+let pointsNum = 1000;
 let lineSlope;
 let lineIntersept;
 
@@ -11,7 +11,7 @@ function setup() {
   lineIntersept = random(1, -1);
   // smallest of windowWidth and windowHeight
   let smallestDimension = min(windowWidth - 100, windowHeight - 100);
-  canvas = createCanvas(smallestDimension+1, smallestDimension+1);
+  canvas = createCanvas(smallestDimension + 1, smallestDimension + 1);
   canvas.parent("canvasContainer");
   // create n points
   for (var i = 0; i < pointsNum; i++) {
@@ -33,7 +33,7 @@ function draw() {
     let right = perceptron.train(inputs, points[i].label);
     if (right) {
       fill(0, 255, 0);
-    }else{
+    } else {
       fill(255, 0, 0);
     }
     ellipse(points[i].px, points[i].py, 8, 8);

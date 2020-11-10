@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Chat",
+  "version": "0.0.1",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["jquery.js", "sketch.js"]
+  }],
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_popup": "not_auth/not_authenticated.html"
+  }
+}

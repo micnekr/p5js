@@ -18,7 +18,7 @@ let trainingData = [{
 function setup() {
   // smallest of windowWidth and windowHeight
   let smallestDimension = min(windowWidth - 100, windowHeight - 100);
-  canvas = createCanvas(smallestDimension+1, smallestDimension+1);
+  canvas = createCanvas(smallestDimension + 1, smallestDimension + 1);
   canvas.parent("canvasContainer");
   // create a new Neural Network!
   nn = new NeuralNetwork(2, 4, 1);
@@ -32,18 +32,18 @@ function draw() {
   }
 
   let resolution = 10;
-  let cols = width/resolution;
-  let rows = height/resolution;
+  let cols = width / resolution;
+  let rows = height / resolution;
 
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
-      let x1 = i/cols;
-      let x2 = j/rows;
+      let x1 = i / cols;
+      let x2 = j / rows;
 
       let inputs = [x1, x2];
       noStroke();
       fill(nn.predict(inputs) * 255);
-      rect(i*resolution, j*resolution, resolution, resolution);
+      rect(i * resolution, j * resolution, resolution, resolution);
     }
   }
 }

@@ -1,0 +1,9 @@
+{
+  "manifest_version": 2,
+  "name": "Content scripts",
+  "version": "0.0.1",
+  "content_scripts": [{
+    "matches":["http://rednoise.org/rita/tutorial/grammars.php"],
+    "js": ["sketch.js"]
+  }]
+}
